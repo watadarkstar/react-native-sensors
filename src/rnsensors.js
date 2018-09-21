@@ -1,4 +1,4 @@
-import { NativeModules, DeviceEventEmitter } from "react-native";
+import { NativeModules } from "react-native";
 const {
   Gyroscope: GyroNative,
   Accelerometer: AccNative,
@@ -18,9 +18,8 @@ const handle = {
 };
 
 const RNSensors = {
-  start: function(type, updateInterval) {
+  start: function(type) {
     const api = handle[type];
-    api.setUpdateInterval(updateInterval);
     api.startUpdates();
   },
 
@@ -32,6 +31,11 @@ const RNSensors = {
   stop: function(type) {
     const api = handle[type];
     api.stopUpdates();
+  },
+
+  setUpdateInterval(type, updateInterval) {
+    const api = handle[type];
+    api.setUpdateInterval(updateInterval);
   }
 };
 
